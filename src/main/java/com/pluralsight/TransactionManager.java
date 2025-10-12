@@ -7,7 +7,6 @@ import java.nio.file.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;//stores transactions
-import java.util.Comparator;//sorts transactions by date/time
 import java.util.Scanner;
 
 public class TransactionManager {
