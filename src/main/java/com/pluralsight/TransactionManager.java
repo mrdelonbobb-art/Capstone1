@@ -16,17 +16,16 @@ public class TransactionManager {
     private ArrayList<Transaction> transactions = new ArrayList<>(); // stores all transactions
     private static final String HEADER = "date|time|description|vendor|amount"; // CSV header
 
-    // -------------------- CONSTRUCTOR --------------------
+    //CONSTRUCTOR______________
     public TransactionManager(String filePath) {
         this.filePath = filePath;
         createFileIfMissing(); // make sure the CSV file exists
         loadTransactions();    // load transactions from the CSV file
     }
 
-    // -------------------- CREATE CSV FILE IF MISSING --------------------
+    // CREATE CSV FILE IF MISSING___________
     private void createFileIfMissing() {
         Path path = Path.of(filePath);
-
         // Check if file already exists
         if (Files.exists(path)) {
             return; // Do nothing if file already exists
@@ -46,7 +45,7 @@ public class TransactionManager {
         }
     }
 
-    // -------------------- LOAD TRANSACTIONS FROM FILE --------------------
+    // LOAD TRANSACTIONS FROM FILE___________
     private void loadTransactions() {
         try {
             for (String line : Files.readAllLines(Path.of(filePath))) {
@@ -63,7 +62,7 @@ public class TransactionManager {
         }
     }
 
-    // -------------------- SAVE TRANSACTIONS BACK TO FILE --------------------
+    // SAVE TRANSACTIONS BACK TO FILE____________
     private void save() {
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(filePath))) {
             writer.write(HEADER);
@@ -79,7 +78,7 @@ public class TransactionManager {
         }
     }
 
-    // -------------------- ADD NEW TRANSACTION --------------------
+    // ADDS NEW TRANSACTION_____________________
     public void addTransaction(Scanner scanner, boolean isDeposit) {
         System.out.print("Enter description: ");
         String desc = scanner.nextLine();
@@ -95,7 +94,7 @@ public class TransactionManager {
             amount = amount.negate();
         }
 
-        // Create a new Transaction object with the current date and time
+        // Create a new Transaction with the current date and time
         Transaction newTransaction = new Transaction(
                 LocalDate.now(),
                 LocalTime.now(),
@@ -109,12 +108,36 @@ public class TransactionManager {
         System.out.println("Transaction added successfully!");
     }
 
-    // -------------------- GET ALL TRANSACTIONS --------------------
+    //GET ALL TRANSACTIONS______________________
     public ArrayList<Transaction> getAll() {
-        // Sort transactions newest first using a simple bubble sort (for learning)
-        ArrayList<Transaction> sortedList = new ArrayList<>(transactions);
-        sortedList.sort(Comparator.comparing(Transaction::getDate)
-                .thenComparing(Transaction::getTime).reversed());
+        //Creates new list to avoid modifying original transactions
+        ArrayList<Transaction> sortedList = new ArrayList<>();
+        for (Transaction t : transactions) {
+            sortedList.add(t);
+        }
+
+        // newest transactions first
+        for (int i = 0; i < sortedList.size(); i++) {
+            for (int j = 0; j < sortedList.size() - 1 - i; j++) {
+                Transaction t1 = sortedList.get(j);
+                Transaction t2 = sortedList.get(j + 1);
+
+                // Compare dates first
+                if (t1.getDate().isBefore(t2.getDate())) {
+                    // Swap if t1 is older than t2
+                    sortedList.set(j, t2);
+                    sortedList.set(j + 1, t1);
+                }
+                // If dates are equal, compare times
+                else if (t1.getDate().isEqual(t2.getDate()) && t1.getTime().isBefore(t2.getTime())) {
+                    // Swap if t1 is earlier in the same day
+                    sortedList.set(j, t2);
+                    sortedList.set(j + 1, t1);
+                }
+            }
+        }
+
+        // 3. Return the sorted list
         return sortedList;
     }
 

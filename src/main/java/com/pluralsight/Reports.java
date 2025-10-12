@@ -70,7 +70,7 @@ public class Reports {
         manager.display(previousMonthTransactions);
     }
 
-    // -------------------- YEAR TO DATE REPORT --------------------
+    //YEAR TO DATE REPORT______________________________________
     public void showYearToDate() {
         LocalDate firstDayOfYear = LocalDate.now().withDayOfYear(1); // January 1 of current year
         LocalDate today = LocalDate.now(); // today's date
@@ -88,7 +88,7 @@ public class Reports {
         manager.display(results);
     }
 
-    // -------------------- PREVIOUS YEAR REPORT --------------------
+    //PREVIOUS YEAR REPORT________________________
     public void showPreviousYear() {
         LocalDate firstDayPrevYear = LocalDate.now().minusYears(1).withDayOfYear(1); // January 1 last year
         LocalDate lastDayPrevYear = firstDayPrevYear.withMonth(12).withDayOfMonth(31); // December 31 last year
@@ -106,12 +106,12 @@ public class Reports {
         manager.display(results);
     }
 
-    // -------------------- SEARCH BY VENDOR REPORT --------------------
+    //SEARCH BY VENDOR REPORT ____________________________________
     public void showByVendor(String vendorName) {
         ArrayList<Transaction> allTransactions = manager.getAll();
         ArrayList<Transaction> results = new ArrayList<>();
 
-        // Loop through all transactions and find matching vendors
+        // Loops through all transactions t0 find specific vendor
         for (Transaction t : allTransactions) {
             if (t.getVendor().equalsIgnoreCase(vendorName)) {
                 results.add(t);
