@@ -1,13 +1,14 @@
 package com.pluralsight;
-import java.util.Scanner;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.util.Scanner;//gets user input
+import java.io.BufferedWriter;//stores text in a buffer before writing to the file.
+import java.io.IOException;//catches errors and prints a message instead of crashing the program.
 import java.nio.file.*;//creating, reading, and writing the transaction.csv file
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.math.BigDecimal;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.time.*;//brings LocalDate, LocalTime, and LocalDateTime classes into program.
+import java.time.format.DateTimeFormatter;//Formatting time when saving to CSV
+import java.math.BigDecimal;//for more precise decimal numbers than double.
+import java.util.ArrayList;//stores transactions
+import java.util.Comparator;//sorts transactions by date/time
+import java.util.stream.Collectors;//filters and collects lists
 public class AccountingLedgarApp {
 
     public static void main(String[] args) {
