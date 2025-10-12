@@ -66,7 +66,7 @@ public class Transaction {
                 vend += " ";
             }
 
-            // formats transaction into a table-like string
+            // formats transaction into table-like string
             return date + "  " + time + "  " + desc + "  " + vend + "  " + String.format("%.2f", amount);
         }
     }
