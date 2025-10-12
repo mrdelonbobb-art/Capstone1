@@ -120,7 +120,7 @@ public class AccountingLedgarApp {
         }
     }
 }
-// ------------------ Transaction Class ------------------
+//Transaction Class -------
 class Transaction {
     private LocalDate date;
     private LocalTime time;
@@ -188,7 +188,7 @@ class Transaction {
     }
 }
 
-// ------------------ TransactionManager Class ------------------
+//TransactionManager Class ------------
 class TransactionManager {
     private String filePath;                   // Path to CSV file
     private ArrayList<Transaction> transactions; // List to store all transactions
