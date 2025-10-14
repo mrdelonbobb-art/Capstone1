@@ -78,7 +78,7 @@ public class AccountingLedgarApp {
             }
         }
     }
-    // ------------------ Reports Menu ------------------
+    //Reports Menu________________
     private static void showReportsMenu(Scanner scanner, Reports reports) {
         boolean inReports = true;
         while (inReports) {

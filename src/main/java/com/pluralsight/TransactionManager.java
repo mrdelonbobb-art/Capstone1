@@ -108,15 +108,14 @@ public class TransactionManager {
     }
 
     //GET ALL TRANSACTIONS______________________
-    public ArrayList<Transaction> getAll() {
-        //Creates new list to avoid modifying original transactions
-        ArrayList<Transaction> sortedList = new ArrayList<>();
+    public ArrayList<Transaction> getAll() { //declared public getAll method
+        ArrayList<Transaction> sortedList = new ArrayList<>();  //Creates new empty list to sort data
         for (Transaction t : transactions) {
             sortedList.add(t);
-        }
+        }   //Loops through each Transaction (t) in original list & puts them in sortedList. so the sorting doesn’t modify the original data.
 
         // newest transactions first
-        for (int i = 0; i < sortedList.size(); i++) {
+        for (int i = 0; i < sortedList.size(); i++) { //compares pairs of neighboring transactions
             for (int j = 0; j < sortedList.size() - 1 - i; j++) {
                 Transaction t1 = sortedList.get(j);
                 Transaction t2 = sortedList.get(j + 1);
@@ -140,19 +139,18 @@ public class TransactionManager {
         return sortedList;
     }
 
-    // -------------------- GET DEPOSITS --------------------
-    public ArrayList<Transaction> getDeposits() {
-        ArrayList<Transaction> deposits = new ArrayList<>();
+    // GET DEPOSITS_______________________________________
+    public ArrayList<Transaction> getDeposits() { //public method named getDeposits which returns an ArrayList containing objects of type Transaction.
+        ArrayList<Transaction> deposits = new ArrayList<>();//Creates empty list named deposits.This stores all Transaction objects that are deposits (positive).
         for (Transaction t : transactions) {
-            // Deposits have positive amounts
-            if (t.getAmount().compareTo(BigDecimal.ZERO) > 0) {
+            if (t.getAmount().compareTo(BigDecimal.ZERO) > 0) { //Checks if the transaction amount is greater than zero.
                 deposits.add(t);
             }
         }
-        return deposits;
+        return deposits; //After looping through all transactions, the method returns the list with only deposits.
     }
 
-    // -------------------- GET PAYMENTS --------------------
+    //GET PAYMENTS___________________________________________
     public ArrayList<Transaction> getPayments() {
         ArrayList<Transaction> payments = new ArrayList<>();
         for (Transaction t : transactions) {
@@ -164,7 +162,7 @@ public class TransactionManager {
         return payments;
     }
 
-    // -------------------- GET TRANSACTIONS BY VENDOR --------------------
+    // GET TRANSACTIONS BY VENDOR --------------------
     public ArrayList<Transaction> getByVendor(String vendor) {
         ArrayList<Transaction> results = new ArrayList<>();
         for (Transaction t : transactions) {
@@ -175,7 +173,7 @@ public class TransactionManager {
         return results;
     }
 
-    // -------------------- GET TRANSACTIONS BY DATE RANGE --------------------
+    //GET TRANSACTIONS BY DATE RANGE____________________________
     public ArrayList<Transaction> getByDateRange(LocalDate start, LocalDate end) {
         ArrayList<Transaction> results = new ArrayList<>();
         for (Transaction t : transactions) {
@@ -186,7 +184,7 @@ public class TransactionManager {
         return results;
     }
 
-    // -------------------- DISPLAY TRANSACTIONS --------------------
+    // DISPLAY TRANSACTIONS__________________________________________
     public void display(ArrayList<Transaction> list) {
         if (list.isEmpty()) {
             System.out.println("No transactions found.");
@@ -194,8 +192,7 @@ public class TransactionManager {
         }
 
         // Print a header row
-        System.out.printf("%-12s %-10s %-25s %-15s %10s%n", "Date", "Time", "Description", "Vendor", "Amount");
-        System.out.println("=".repeat(75));
+        System.out.println("Date         Time       Description               Vendor          Amount");
 
         // Display each transaction using its displayTransaction() method
         for (Transaction t : list) {

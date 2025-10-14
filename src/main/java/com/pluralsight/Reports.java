@@ -45,7 +45,7 @@ public class Reports {
 
         LocalDate lastDayLastMonth = firstDayLastMonth// First day of previous month
                 .plusMonths(1)  // Move to next month
-                .minusDays(1); // Go back one day → last day of previous month
+                .minusDays(1); // Go back one day :last day of previous month
 
         //Gets all transactions from the manager
         ArrayList<Transaction> allTransactions = manager.getAll();
