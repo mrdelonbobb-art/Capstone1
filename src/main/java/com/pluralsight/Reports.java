@@ -9,7 +9,6 @@ public class Reports {
     public Reports(TransactionManager manager) {
         this.manager = manager;
     }
-
     //MONTH TO DATE REPORT______
     public void showMonthToDate() {
         // Gets all transactions from the manager
