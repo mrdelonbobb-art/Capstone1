@@ -3,7 +3,6 @@ import java.util.Scanner;//gets user input
 import java.nio.file.*;//creating, reading, and writing the transaction.csv file
 import java.time.*;//brings LocalDate, LocalTime, and LocalDateTime classes into program.
 public class AccountingLedgarApp {
-
     public static void main(String[] args) {
         TransactionManager manager = new TransactionManager("transactions.csv");//manages and displays transactions from the CSV file.
         Reports reports = new Reports(manager);//allows Reports class to access transactions in TransactionManager
