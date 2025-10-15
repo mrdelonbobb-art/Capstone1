@@ -19,7 +19,7 @@ public class AccountingLedgarApp {
             System.out.print("Choose: ");
 
             // Reads input
-            String choice = scanner.nextLine().trim();
+            String choice = scanner.nextLine().trim().toUpperCase();
 
             // Handle choices with if-else statements
             if (choice.equals("D")) {
@@ -90,7 +90,7 @@ public class AccountingLedgarApp {
             System.out.println("0) Back");
             System.out.print("Choose: ");
 
-            String choice = scanner.nextLine().trim();
+            String choice = scanner.nextLine().trim().toUpperCase();
 
             if (choice.equals("1")) {
                 reports.showMonthToDate();
