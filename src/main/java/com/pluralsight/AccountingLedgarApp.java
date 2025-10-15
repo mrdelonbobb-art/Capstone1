@@ -55,7 +55,7 @@ public class AccountingLedgarApp {
             System.out.println("H) Back to Home");
             System.out.print("Choose: ");
 
-            String choice = scanner.nextLine().trim();
+            String choice = scanner.nextLine().trim().toUpperCase();
 
             if (choice.equals("A")) {
                 // Display all transactions
