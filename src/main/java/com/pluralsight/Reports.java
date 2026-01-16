@@ -1,4 +1,5 @@
 package com.pluralsight;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;//imports arraylist from TransactionManager
 
@@ -121,5 +122,53 @@ public class Reports {
         manager.display(results);
     }
 
-}
+    //SEARCH BY Description REPORT ____________________________________
+    public void showByDescription(String description) {
+        ArrayList<Transaction> allTransactions = manager.getAll();
+        ArrayList<Transaction> results = new ArrayList<>();
+
+        // Loops through all transactions t0 find specific desccription
+        for (Transaction t : allTransactions) {
+            if (t.getDescription().equalsIgnoreCase(description)) {
+                results.add(t);
+            }
+        }
+
+        System.out.println("\n=== Transactions for description: " + description + " ===");
+        manager.display(results);
+    }
+    // Custom search method using Streams
+    public void customSearch(LocalDate startDate,
+                             LocalDate endDate,
+                             String description,
+                             String vendor,
+                             double minAmount,
+                            double maxAmount) {
+
+        ArrayList<Transaction> results = manager.getAll().stream()
+
+                // Date range filter
+                .filter(t -> startDate == null || !t.getDate().isBefore(startDate))
+                .filter(t -> endDate == null || !t.getDate().isAfter(endDate))
+
+                // Description filter
+                .filter(t -> description == null || description.isEmpty() ||
+                        t.getDescription().equalsIgnoreCase(description))
+
+                // Vendor filter
+                .filter(t -> vendor == null || vendor.isEmpty() ||
+                        t.getVendor().equalsIgnoreCase(vendor))
+
+                // Amount filter
+                .filter(t -> t.getAmount() >= minAmount && t.getAmount() <= maxAmount)
+
+                // Collect results
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+
+        System.out.println("\n=== Custom Search Results ===");
+        manager.display(results);
+    }
+    }
+
+
 

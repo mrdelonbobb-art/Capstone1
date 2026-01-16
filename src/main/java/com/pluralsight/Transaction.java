@@ -9,10 +9,10 @@ public class Transaction {
         private LocalTime time;
         private String description;
         private String vendor;
-        private BigDecimal amount;
+        private double amount;
 
         // Constructor to create a new transaction
-        public Transaction(LocalDate date, LocalTime time, String description, String vendor, BigDecimal amount) {
+        public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
             this.date = date;
             this.time = time;
             this.description = description;
@@ -24,7 +24,7 @@ public class Transaction {
         public LocalDate getDate() { return date; }
         public LocalTime getTime() { return time; }
         public String getVendor() { return vendor; }
-        public BigDecimal getAmount() { return amount; }
+        public double getAmount() { return amount; }
         public String getDescription() {return description; //added
     }
 
@@ -42,7 +42,7 @@ public class Transaction {
                     LocalTime.parse(parts[1]),         // time (e.g., 10:13:25)
                     parts[2],                          // description
                     parts[3],                          // vendor
-                    new BigDecimal(parts[4])           // amount
+                    Double.parseDouble( parts[4])          // amount
             );
         }
 

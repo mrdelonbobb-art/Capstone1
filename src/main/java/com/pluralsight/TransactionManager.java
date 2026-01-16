@@ -6,6 +6,7 @@ import java.math.BigDecimal;//for more precise decimal numbers than double.
 import java.nio.file.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;//stores transactions
 import java.util.Scanner;
 
@@ -86,17 +87,17 @@ public class TransactionManager {
         String vendor = scanner.nextLine();
 
         System.out.print("Enter amount: ");
-        BigDecimal amount = new BigDecimal(scanner.nextLine());
+        double amount = Double.parseDouble(scanner.nextLine());
 
         // If this is a payment, make it a negative number
         if (!isDeposit) {
-            amount = amount.negate();
+            amount *= -1;
         }
 
         // Create a new Transaction with the current date and time
         Transaction newTransaction = new Transaction(
                 LocalDate.now(),
-                LocalTime.now(),
+                LocalTime.now().truncatedTo(ChronoUnit.SECONDS), //fixed nano second bug
                 desc,
                 vendor,
                 amount
@@ -143,7 +144,7 @@ public class TransactionManager {
     public ArrayList<Transaction> getDeposits() { //public method named getDeposits which returns an ArrayList containing objects of type Transaction.
         ArrayList<Transaction> deposits = new ArrayList<>();//Creates empty list named deposits.This stores all Transaction objects that are deposits (positive).
         for (Transaction t : transactions) {
-            if (t.getAmount().compareTo(BigDecimal.ZERO) > 0) { //Checks if the transaction amount is greater than zero.
+            if (t.getAmount() > 0) { //Checks if the transaction amount is greater than zero.
                 deposits.add(t);
             }
         }
@@ -155,7 +156,7 @@ public class TransactionManager {
         ArrayList<Transaction> payments = new ArrayList<>();
         for (Transaction t : transactions) {
             // Payments have negative amounts
-            if (t.getAmount().compareTo(BigDecimal.ZERO) < 0) {
+            if (t.getAmount() < 0) {
                 payments.add(t);
             }
         }

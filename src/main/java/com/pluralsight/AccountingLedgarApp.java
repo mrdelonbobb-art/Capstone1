@@ -1,7 +1,9 @@
 package com.pluralsight;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;//gets user input
 import java.nio.file.*;//creating, reading, and writing the transaction.csv file
 import java.time.*;//brings LocalDate, LocalTime, and LocalDateTime classes into program.
+
 public class AccountingLedgarApp {
     public static void main(String[] args) {
         TransactionManager manager = new TransactionManager("transactions.csv");//manages and displays transactions from the CSV file.
@@ -87,7 +89,7 @@ public class AccountingLedgarApp {
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search by Vendor");
-            System.out.println("6) Search by Description");
+            System.out.println("6) Custom Search");
             System.out.println("0) Back");
             System.out.print("Choose: ");
 
@@ -105,11 +107,22 @@ public class AccountingLedgarApp {
                 System.out.print("Enter vendor name: ");
                 String vendor = scanner.nextLine();
                 reports.showByVendor(vendor);
-               /* else if (choice.equals("6")){
-                    System.out.println("enter description of transaction: ");
+            } else if (choice.equals("6")){ //added
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                System.out.println("Enter a start date");
+                    LocalDate startDate = LocalDate.parse(scanner.nextLine(), formatter);
+                    System.out.println("enter end date");
+                    LocalDate endDate = LocalDate.parse(scanner.nextLine(), formatter);
+                    System.out.print("Enter description of transaction: ");
                     String description = scanner.nextLine();
-                    reports.
-                } */
+                    System.out.println("enter vendor");
+                    String vendor = scanner.nextLine();
+                    System.out.println("enter minimum amount");
+                    double minAmount = Double.parseDouble(scanner.nextLine());
+                    System.out.println("enter max amount");
+                    double maxAmount = Double.parseDouble(scanner.nextLine());
+                    reports.customSearch( startDate,endDate,description,vendor,minAmount,maxAmount);
             } else if (choice.equals("0")) {
                 inReports = false; // Back to ledger menu
             } else {
