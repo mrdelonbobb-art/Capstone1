@@ -183,6 +183,16 @@ public class TransactionManager {
         }
         return results;
     }
+    //GET TRANSACTIONS BY DESCRIPTION______________________________-
+    public ArrayList<Transaction> getByDescription(String description) {
+        ArrayList<Transaction> results = new ArrayList<>();
+        for (Transaction t : transactions) {
+            if (t.getDescription().equalsIgnoreCase(description)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
 
     // DISPLAY TRANSACTIONS__________________________________________
     public void display(ArrayList<Transaction> list) {

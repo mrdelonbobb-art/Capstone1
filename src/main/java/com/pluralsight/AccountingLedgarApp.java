@@ -87,6 +87,7 @@ public class AccountingLedgarApp {
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search by Vendor");
+            System.out.println("6) Search by Description");
             System.out.println("0) Back");
             System.out.print("Choose: ");
 
@@ -104,6 +105,11 @@ public class AccountingLedgarApp {
                 System.out.print("Enter vendor name: ");
                 String vendor = scanner.nextLine();
                 reports.showByVendor(vendor);
+               /* else if (choice.equals("6")){
+                    System.out.println("enter description of transaction: ");
+                    String description = scanner.nextLine();
+                    reports.
+                } */
             } else if (choice.equals("0")) {
                 inReports = false; // Back to ledger menu
             } else {

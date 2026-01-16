@@ -120,4 +120,6 @@ public class Reports {
         System.out.println("\n=== Transactions for Vendor: " + vendorName + " ===");
         manager.display(results);
     }
+
 }
+

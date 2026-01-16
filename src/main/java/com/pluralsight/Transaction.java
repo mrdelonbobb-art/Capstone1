@@ -25,8 +25,10 @@ public class Transaction {
         public LocalTime getTime() { return time; }
         public String getVendor() { return vendor; }
         public BigDecimal getAmount() { return amount; }
+        public String getDescription() {return description; //added
+    }
 
-        // Converts transaction into a CSV string to be saved in csv file
+    // Converts transaction into a CSV string to be saved in csv file
         public String toCSV() {
             return date + "|" + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) +
                     "|" + description + "|" + vendor + "|" + amount;
